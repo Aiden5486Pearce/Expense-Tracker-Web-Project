@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 exports.signUp=(req, res, next) => {
     const{name, email,phone, password}=req.body
-phone.toString()
+console.log(name,email,phone,password);
     const saltRounds = 5;
     bcrypt.genSalt(saltRounds, function(err, salt) {
         bcrypt.hash(password, salt, function(err, hash) {
@@ -13,9 +13,9 @@ phone.toString()
                 res.json({message:`unable to create new user`});
             }
             User.create({name,email,phone,password:hash}).then(()=>{
-                res.status(201).json({message:`user created`});
+                res.status(201).json({message:`Successfuly signed up`});
             }).catch((err) => {
-                res.status(403).json({success:false,error:err})
+                res.status(403).send({err:`user already exists,please login`})
             })
         });
     });

@@ -22,7 +22,7 @@ exports.login=(req, res) => {
                 }
                 if (result) {
                     const token = generateAccessToken(user[0].id)
-                    return res.json({token:token,success: true,message:`Successfully Logged In`})
+                    return res.json({token:token,success: true,message:`Successfully Logged In`,user:user[0].name})
                 }else{
                   return res.status(401).json({success: false,message:`password does not match`})
                 }
